@@ -6,18 +6,13 @@ public class OptionParser {
     public static MoveDirection[] parser(String[] args){
         int l =0;
 
+        // wyznaczamy długość tablicy
         for (String arg:args) {
 
-            switch (arg.toLowerCase()){
-                case "backward": break;
-                case "forward": break;
-                case "left": break;
-                case "right": break;
-                default:
-                    l--;
-                    break;
+            if ("f".equalsIgnoreCase(arg) || "b".equalsIgnoreCase(arg) ||"l".equalsIgnoreCase(arg) ||"r".equalsIgnoreCase(arg) ){
+                l++;
             }
-            l++;
+
         }
 
         MoveDirection[] table = new MoveDirection[l];
@@ -26,19 +21,19 @@ public class OptionParser {
         for (String arg:args) {
 
             switch (arg.toLowerCase()){
-                case "backward":
+                case "b":
                     table[i] = MoveDirection.BACKWARD;
                     i++;
                     break;
-                case "forward":
+                case "f":
                     table[i] = MoveDirection.FORWARD;
                     i++;
                     break;
-                case "left":
+                case "l":
                     table[i] = MoveDirection.LEFT;
                     i++;
                     break;
-                case "right":
+                case "r":
                     table[i] = MoveDirection.RIGHT;
                     i++;
                     break;

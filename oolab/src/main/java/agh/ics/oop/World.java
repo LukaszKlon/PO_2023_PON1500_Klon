@@ -6,10 +6,10 @@ import java.sql.SQLOutput;
 
 public class World {
     public static void main(String[] args) {
-        System.out.println("System wystartował");
+        System.out.println("Start");
         MoveDirection[] table = OptionParser.parser(args);
         World.run(table);
-        System.out.println("System zakończył działanie");
+        System.out.println("Stop");
     }
 
     public static void run(MoveDirection[] args){
@@ -20,7 +20,7 @@ public class World {
                 case BACKWARD -> System.out.println("Zwierzak idzie do tyłu");
                 case RIGHT -> System.out.println("Zwierzak skręca w prawo");
                 case LEFT -> System.out.println("Zwierzak skręca w lewo");
-                default -> System.out.println("Błąd");
+                default -> System.out.println("błąd");
             }
         }
     }
