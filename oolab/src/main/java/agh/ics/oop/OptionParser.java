@@ -2,46 +2,23 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OptionParser {
-    public static MoveDirection[] parser(String[] args){
-        int l =0;
-
-        // wyznaczamy długość tablicy
-        for (String arg:args) {
-
-            if ("f".equalsIgnoreCase(arg) || "b".equalsIgnoreCase(arg) ||"l".equalsIgnoreCase(arg) ||"r".equalsIgnoreCase(arg) ){
-                l++;
-            }
-
-        }
-
-        MoveDirection[] table = new MoveDirection[l];
-        int i = 0;
+    public static List<MoveDirection> parser(String[] args){
+        List<MoveDirection> moveTable = new ArrayList<>();
 
         for (String arg:args) {
-
-            switch (arg.toLowerCase()){
-                case "b":
-                    table[i] = MoveDirection.BACKWARD;
-                    i++;
-                    break;
-                case "f":
-                    table[i] = MoveDirection.FORWARD;
-                    i++;
-                    break;
-                case "l":
-                    table[i] = MoveDirection.LEFT;
-                    i++;
-                    break;
-                case "r":
-                    table[i] = MoveDirection.RIGHT;
-                    i++;
-                    break;
-                default:
-                    break;
+            switch (arg){
+                case "f" -> moveTable.add(MoveDirection.FORWARD);
+                case "b" -> moveTable.add(MoveDirection.BACKWARD);
+                case "l" -> moveTable.add(MoveDirection.LEFT);
+                case "r" -> moveTable.add(MoveDirection.RIGHT);
+                default -> {}
             }
         }
-        return table;
+        return moveTable;
     }
 }
 
