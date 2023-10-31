@@ -1,8 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +9,15 @@ public class Simulation {
 
     private final List<Animal> animalsArray = new ArrayList<>();
     private final List<MoveDirection> moves;
+    private WorldMap mapOfWorld;
 
-    public Simulation(List<MoveDirection> moves, List<Vector2d> positions){
+    public Simulation(List<MoveDirection> moves, List<Vector2d> positions, WorldMap mapOfWorld){
+        this.mapOfWorld = mapOfWorld;
         for (Vector2d position:positions) {
-            animalsArray.add(new Animal(position));
+            Animal temporaryAnimal = new Animal(position);
+            if(mapOfWorld.place(temporaryAnimal)){
+                animalsArray.add(temporaryAnimal);
+            }
         }
         this.moves = moves;
     }
@@ -23,10 +26,12 @@ public class Simulation {
         int animalsCount = animalsArray.size();
         int currentAnimal = 0;
         for (MoveDirection move:moves) {
+            System.out.println(move);
             Animal newAnimal = animalsArray.get(currentAnimal);
-            newAnimal.move(move);
+            mapOfWorld.move(newAnimal,move);
             currentAnimal++;
-            System.out.println("Zwierzę " + currentAnimal +" " +newAnimal.toString() );
+            System.out.println(mapOfWorld.toString());
+//            System.out.println("Zwierzę " + currentAnimal +" " +newAnimal.toString() );
             if (currentAnimal >= animalsCount){
                 currentAnimal = 0;
             }
