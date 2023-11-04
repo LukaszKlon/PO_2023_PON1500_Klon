@@ -4,9 +4,9 @@ import agh.ics.oop.MapVisualizer;
 
 import java.util.HashMap;
 import java.util.Map;
-public class RectangularMap implements WorldMap{
+public class RectangularMap implements WorldMap<Animal,Vector2d>{
 
-    Map<Vector2d, Animal> animals = new HashMap<>();
+    Map<Vector2d,Animal> animals = new HashMap<>();
     static final Vector2d LEFT_BOTTOM_MAP_CORNER = new Vector2d(0,0);
     private final Vector2d rightTopMapCorner;
 
@@ -20,18 +20,18 @@ public class RectangularMap implements WorldMap{
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if (canMoveTo(animal.getCordinats())) {
-            animals.put(animal.getCordinats(),animal);
+    public boolean place(Animal animal,Vector2d position) {
+        if (canMoveTo(position)) {
+            animals.put(position,animal);
             return true;
         }
         return false;
     }
 
     @Override
-    public void move(Animal animal, MoveDirection direction) {
-        if ( animal == objectAt(animal.getCordinats())){
-            animals.remove(animal.getCordinats());
+    public void move(Animal animal,Vector2d position, MoveDirection direction) {
+        if ( animal == objectAt(position)){
+            animals.remove(position);
             animal.move(direction,this);
             animals.put(animal.getCordinats(),animal);
         }

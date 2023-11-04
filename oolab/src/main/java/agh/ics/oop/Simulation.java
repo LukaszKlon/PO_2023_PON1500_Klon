@@ -9,13 +9,13 @@ public class Simulation {
 
     private final List<Animal> animalsArray = new ArrayList<>();
     private final List<MoveDirection> moves;
-    private WorldMap mapOfWorld;
+    private final RectangularMap mapOfWorld;
 
-    public Simulation(List<MoveDirection> moves, List<Vector2d> positions, WorldMap mapOfWorld){
+    public Simulation(List<MoveDirection> moves, List<Vector2d> positions, RectangularMap mapOfWorld){
         this.mapOfWorld = mapOfWorld;
         for (Vector2d position:positions) {
             Animal temporaryAnimal = new Animal(position);
-            if(mapOfWorld.place(temporaryAnimal)){
+            if(mapOfWorld.place(temporaryAnimal,position)){
                 animalsArray.add(temporaryAnimal);
             }
         }
@@ -26,12 +26,10 @@ public class Simulation {
         int animalsCount = animalsArray.size();
         int currentAnimal = 0;
         for (MoveDirection move:moves) {
-            System.out.println(move);
             Animal newAnimal = animalsArray.get(currentAnimal);
-            mapOfWorld.move(newAnimal,move);
+            mapOfWorld.move(newAnimal,newAnimal.getCordinats(),move);
             currentAnimal++;
             System.out.println(mapOfWorld.toString());
-//            System.out.println("Zwierzę " + currentAnimal +" " +newAnimal.toString() );
             if (currentAnimal >= animalsCount){
                 currentAnimal = 0;
             }
