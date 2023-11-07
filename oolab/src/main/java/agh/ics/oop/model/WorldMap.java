@@ -9,7 +9,7 @@ import agh.ics.oop.model.Vector2d;
  *
  * @author apohllo, idzik
  */
-public interface WorldMap<T,P> extends MoveValidator<P>{
+public interface WorldMap<T extends WorldElement<P>,P> extends MoveValidator<P>{
 
     /**
      * Place a animal on the map.

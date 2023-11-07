@@ -12,7 +12,7 @@ public class World {
 //        System.out.println(zwierzak.toString());
         List<MoveDirection> directions = OptionParser.parser(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        Simulation simulation = new Simulation(directions, positions,new RectangularMap(6,6));
+        Simulation simulation = new Simulation(directions, positions,new GrassField(10));
         simulation.run();
         System.out.println("Stop");
     }

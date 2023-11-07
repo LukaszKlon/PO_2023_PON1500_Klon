@@ -1,6 +1,6 @@
 package agh.ics.oop.model;
 
-public class Animal {
+public class Animal implements WorldElement<Vector2d>{
 
     final static Vector2d RIGHT_TOP_MAP_CORNER = new Vector2d(4, 4);
     final static Vector2d LEFT_BOTTOM_MAP_CORNER = new Vector2d(0, 0);
@@ -10,10 +10,10 @@ public class Animal {
     final static Vector2d VECTOR_GO_RIGHT = new Vector2d(1, 0);
     private MapDirection orientation;
 
-    private Vector2d cordinats;
+    private Vector2d position;
 
-    public Vector2d getCordinats() {
-        return cordinats;
+    public Vector2d getPosition() {
+        return position;
     }
 
     public MapDirection getOrientation() {
@@ -26,7 +26,7 @@ public class Animal {
 
     public Animal(Vector2d start) {
         this.orientation = MapDirection.NORTH;
-        this.cordinats = start;
+        this.position = start;
     }
 
     public String toString() {
@@ -39,7 +39,7 @@ public class Animal {
     }
 
     public boolean isAt(Vector2d position) {
-        return this.cordinats.equals(position);
+        return this.position.equals(position);
     }
 
     private boolean insideArea(Vector2d futureMove){
@@ -53,27 +53,27 @@ public class Animal {
             case BACKWARD -> {
                     switch (this.orientation) {
                         case NORTH -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_DOWN);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_DOWN);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                         case SOUTH -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_UP);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_UP);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                         case EAST -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_LEFT);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_LEFT);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                         case WEST -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_RIGHT);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_RIGHT);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                     }
@@ -82,27 +82,27 @@ public class Animal {
                 case FORWARD -> {
                     switch (this.orientation) {
                         case NORTH -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_UP);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_UP);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                         case SOUTH -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_DOWN);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_DOWN);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                         case EAST -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_RIGHT);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_RIGHT);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                         case WEST -> {
-                            Vector2d futureMove = this.cordinats.add(VECTOR_GO_LEFT);
+                            Vector2d futureMove = this.position.add(VECTOR_GO_LEFT);
                             if (validMove.canMoveTo(futureMove)) {
-                                this.cordinats = futureMove;
+                                this.position = futureMove;
                             }
                         }
                     }

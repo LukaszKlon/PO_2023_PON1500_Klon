@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Grass;
 import agh.ics.oop.model.WorldMap;
 import agh.ics.oop.model.Vector2d;
 
