@@ -187,4 +187,14 @@ class RectangularMapTest {
                 " -1: -------\r\n";
         assertEquals(result,rectangularMap.toString());
     }
+
+    @Test
+    void getElementsAllObjects() {
+        RectangularMap rectangularMap = new RectangularMap(6,6);
+        Animal animalFirst = new Animal(new Vector2d(4,4));
+        Animal animalSecond = new Animal(new Vector2d(3,4));
+        rectangularMap.place(animalFirst,animalFirst.getPosition());
+        rectangularMap.place(animalSecond,animalSecond.getPosition());
+        assertEquals(2,rectangularMap.getElements().size());
+    }
 }

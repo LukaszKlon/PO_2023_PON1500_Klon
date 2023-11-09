@@ -104,4 +104,14 @@ class GrassFieldTest {
         assertEquals(true,grassField.objectAt(grassPosition.next()) instanceof Grass);
     }
 
+    @Test
+    void getElementsAllObjects() {
+        GrassField grassField = new GrassField(10);
+        Animal animalFirst = new Animal(new Vector2d(4,4));
+        Animal animalSecond = new Animal(new Vector2d(3,4));
+        grassField.place(animalFirst,animalFirst.getPosition());
+        grassField.place(animalSecond,animalSecond.getPosition());
+        assertEquals(12,grassField.getElements().size());
+    }
+
 }
