@@ -17,13 +17,13 @@ public interface WorldMap<T,P> extends MoveValidator<P>{
      * @param object,position The object to place on the map.
      * @return True if the object was placed. The object cannot be placed if the move is not valid.
      */
-    boolean place(T object,P position);
+    boolean place(T object);
 
     /**
      * Moves an object (if it is present on the map) according to specified direction.
      * If the move is not possible, this method has no effect.
      */
-    void move(T object,P position, MoveDirection direction);
+    void move(T object, MoveDirection direction);
 
     /**
      * Return true if given position on the map is occupied. Should not be
