@@ -5,7 +5,7 @@
 //import java.util.Collections;
 //import java.util.List;
 //
-//public class TextMap implements WorldMap<String ex,Integer>{
+//public class TextMap implements WorldMap<String,Integer>{
 //
 //    private final List<MapDirection> orientationList;
 //    private final List<String> stringList;
@@ -21,21 +21,16 @@
 //    }
 //
 //    @Override
-//    public boolean place(String object, Integer position) {
-//        if (position == stringList.size()){
-//            stringList.add(object);
-//            orientationList.add(MapDirection.NORTH);
-//            return true;
-//        }
-//        return false;
+//    public boolean place(String object) {
+//        stringList.add(object);
+//        orientationList.add(MapDirection.NORTH);
+//        return true;
 //    }
 //
-//    public boolean place(String object) {
-//        return place(object,stringList.size());
-//    }
 //    @Override
-//    public void move(String object, Integer position, MoveDirection direction) {
-//        if (stringList.get(position).equals(object)){
+//    public void move(String object, MoveDirection direction) {
+//        Integer position = this.position(object);
+//        if (position != null){
 //            switch(direction){
 //                case LEFT -> orientationList.set(position,orientationList.get(position).previous());
 //                case RIGHT -> orientationList.set(position,orientationList.get(position).next());
@@ -81,6 +76,17 @@
 //    @Override
 //    public String objectAt(Integer position) {
 //        return stringList.get(position);
+//    }
+//
+//    private Integer position(String findString){
+//        Integer counter = 0;
+//        for (String string:stringList) {
+//            if (string.equals(findString)){
+//                return counter;
+//            }
+//            counter ++;
+//        }
+//        return null;
 //    }
 //
 //    @Override
