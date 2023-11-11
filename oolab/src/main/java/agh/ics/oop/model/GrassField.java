@@ -14,17 +14,18 @@ public class GrassField extends AbstractWorldMap{
         int parameter = (int) Math.sqrt(countGrass*10);
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(parameter, parameter, countGrass);
         for (Vector2d temporaryVector : randomPositionGenerator) {
-            place(new Grass(temporaryVector), temporaryVector);
+            place(new Grass(temporaryVector));
         }
     }
 
     @Override
-    public boolean place(WorldElement<Vector2d> object, Vector2d position) {
+    public boolean place(WorldElement<Vector2d> object) {
+        Vector2d position = object.getPosition();
         if (object instanceof Grass grass){
             grasses.put(position,grass);
             return true;
         }
-        return super.place(object,position);
+        return super.place(object);
     }
 
     public boolean isOccupied(Vector2d position) {

@@ -22,7 +22,8 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
         return position.precedes(rightTopMapCorner) && position.follows(leftBottomMapCorner) && !isOccupiedAnimal(position);
     }
 
-    public boolean place(WorldElement<Vector2d> object,Vector2d position) {
+    public boolean place(WorldElement<Vector2d> object) {
+        Vector2d position = object.getPosition();
         if (object instanceof Animal animal){
             if (canMoveTo(position)) {
                 animals.put(position,animal);
@@ -33,13 +34,12 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
         return false;
     }
 
-    public void move(WorldElement<Vector2d> object, Vector2d position, MoveDirection direction) {
+    public void move(WorldElement<Vector2d> object, MoveDirection direction) {
+        Vector2d position = object.getPosition();
         if (object instanceof Animal animal){
-            if ( animal == objectAt(position)){
-                animals.remove(position);
-                animal.move(direction,this);
-                animals.put(animal.getPosition(),animal);
-            }
+            animals.remove(position);
+            animal.move(direction,this);
+            animals.put(animal.getPosition(),animal);
         }
     }
 

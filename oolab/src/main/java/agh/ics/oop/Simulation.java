@@ -15,7 +15,7 @@ public class Simulation {
         this.mapOfWorld = mapOfWorld;
         for (Vector2d position:positions) {
             Animal temporaryAnimal = new Animal(position);
-            if(mapOfWorld.place(temporaryAnimal,position)){
+            if(mapOfWorld.place(temporaryAnimal)){
                 animalsArray.add(temporaryAnimal);
             }
         }
@@ -27,7 +27,7 @@ public class Simulation {
         int currentAnimal = 0;
         for (MoveDirection move:moves) {
             Animal newAnimal = animalsArray.get(currentAnimal);
-            mapOfWorld.move(newAnimal,newAnimal.getPosition(),move);
+            mapOfWorld.move(newAnimal,move);
             currentAnimal++;
             System.out.println(mapOfWorld.toString());
             if (currentAnimal >= animalsCount){
