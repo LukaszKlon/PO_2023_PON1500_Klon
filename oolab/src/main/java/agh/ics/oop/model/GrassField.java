@@ -7,7 +7,7 @@ import java.util.*;
 
 public class GrassField extends AbstractWorldMap{
 
-    private final Map<Vector2d,Grass> grasses = new HashMap<>();
+    private final Map<Vector2d,WorldElement<Vector2d>> grasses = new HashMap<>();
 
     public GrassField(int countGrass) {
         super(new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE));
@@ -21,8 +21,8 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public boolean place(WorldElement<Vector2d> object) {
         Vector2d position = object.getPosition();
-        if (object instanceof Grass grass){
-            grasses.put(position,grass);
+        if (!object.movable()){
+            grasses.put(position,object);
             return true;
         }
         return super.place(object);
@@ -37,7 +37,7 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public WorldElement<Vector2d> objectAt(Vector2d position) {
-        Animal animal = (Animal) super.objectAt(position);
+        WorldElement<Vector2d> animal =  super.objectAt(position);
         if (animal != null){
             return animal;
         }

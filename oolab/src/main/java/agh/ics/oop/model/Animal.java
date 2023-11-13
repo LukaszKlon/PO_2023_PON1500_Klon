@@ -8,6 +8,8 @@ public class Animal implements WorldElement<Vector2d>{
     final static Vector2d VECTOR_GO_DOWN = new Vector2d(0, -1);
     final static Vector2d VECTOR_GO_LEFT = new Vector2d(-1, 0);
     final static Vector2d VECTOR_GO_RIGHT = new Vector2d(1, 0);
+
+    private static final boolean CAN_MOVE= true;
     private MapDirection orientation;
 
     private Vector2d position;
@@ -36,6 +38,11 @@ public class Animal implements WorldElement<Vector2d>{
             case EAST -> "E";
             case WEST -> "W";
         };
+    }
+
+    @Override
+    public boolean movable() {
+        return CAN_MOVE;
     }
 
     public boolean isAt(Vector2d position) {

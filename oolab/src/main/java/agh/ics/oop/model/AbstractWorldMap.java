@@ -9,7 +9,7 @@ import java.util.Map;
 
 public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d>,Vector2d>{
 
-    protected Map<Vector2d,Animal> animals = new HashMap<>();
+    protected Map<Vector2d,WorldElement<Vector2d>> animals = new HashMap<>();
     private final Vector2d leftBottomMapCorner;
     private final Vector2d rightTopMapCorner;
 
@@ -24,9 +24,9 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
 
     public boolean place(WorldElement<Vector2d> object) {
         Vector2d position = object.getPosition();
-        if (object instanceof Animal animal){
+        if (object.movable()){
             if (canMoveTo(position)) {
-                animals.put(position,animal);
+                animals.put(position,object);
                 return true;
             }
             return false;
@@ -36,10 +36,10 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
 
     public void move(WorldElement<Vector2d> object, MoveDirection direction) {
         Vector2d position = object.getPosition();
-        if (object instanceof Animal animal){
+        if (object.movable()){
             animals.remove(position);
-            animal.move(direction,this);
-            animals.put(animal.getPosition(),animal);
+            object.move(direction,this);
+            animals.put(object.getPosition(),object);
         }
     }
 

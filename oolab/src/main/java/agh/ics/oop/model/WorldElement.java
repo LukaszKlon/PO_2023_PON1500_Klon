@@ -4,6 +4,7 @@ import javax.swing.text.Position;
 
 public interface WorldElement<P> {
 
+
     /**
      * Get position.
      *
@@ -14,5 +15,9 @@ public interface WorldElement<P> {
     P getPosition();
 
     String toString();
+
+    boolean movable();
+
+    void move(MoveDirection direction,MoveValidator validMove);
 
 }
