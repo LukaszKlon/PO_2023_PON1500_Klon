@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.PositionAlreadyOccupiedException;
+
 public class Animal implements WorldElement<Vector2d>{
 
     final static Vector2d RIGHT_TOP_MAP_CORNER = new Vector2d(4, 4);
@@ -54,10 +56,11 @@ public class Animal implements WorldElement<Vector2d>{
     }
 
     public void move(MoveDirection direction,MoveValidator validMove) {
-        switch (direction) {
-            case LEFT -> this.orientation = this.orientation.previous();
-            case RIGHT -> this.orientation = this.orientation.next();
-            case BACKWARD -> {
+        try {
+            switch (direction) {
+                case LEFT -> this.orientation = this.orientation.previous();
+                case RIGHT -> this.orientation = this.orientation.next();
+                case BACKWARD -> {
                     switch (this.orientation) {
                         case NORTH -> {
                             Vector2d futureMove = this.position.add(VECTOR_GO_DOWN);
@@ -115,5 +118,9 @@ public class Animal implements WorldElement<Vector2d>{
                     }
                 }
             }
+        }
+        catch (PositionAlreadyOccupiedException p){
+
+        }
         }
     }

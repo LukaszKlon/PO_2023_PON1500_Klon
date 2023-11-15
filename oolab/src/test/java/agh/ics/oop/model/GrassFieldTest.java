@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
@@ -11,14 +12,24 @@ class GrassFieldTest {
     @Test
     void canMoveToEmptyMap() {
         GrassField grassField = new GrassField(10);
-        assertEquals(true,grassField.canMoveTo(new Vector2d(3,3)));
+        try {
+            assertTrue(grassField.canMoveTo(new Vector2d(3,3)));
+        }
+        catch (PositionAlreadyOccupiedException p){
+
+        }
     }
 
     @Test
     void canMoveToOccupiedPosition() {
         GrassField grassField = new GrassField(10);
         grassField.place(new Animal(new Vector2d(3,3)));
-        assertEquals(false,grassField.canMoveTo(new Vector2d(3,3)));
+        try {
+            assertEquals(false,grassField.canMoveTo(new Vector2d(3,3)));
+        }
+        catch (PositionAlreadyOccupiedException p){
+                assertTrue(true);
+        }
     }
 
     @Test

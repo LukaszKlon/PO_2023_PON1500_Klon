@@ -29,7 +29,6 @@ public class Simulation {
             Animal newAnimal = animalsArray.get(currentAnimal);
             mapOfWorld.move(newAnimal,move);
             currentAnimal++;
-            System.out.println(mapOfWorld.toString());
             if (currentAnimal >= animalsCount){
                 currentAnimal = 0;
             }

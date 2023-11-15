@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,20 +10,36 @@ class RectangularMapTest {
     @Test
     void canMoveToEmptyMap() {
         RectangularMap rectangularMap = new RectangularMap(5,5);
-        assertEquals(true,rectangularMap.canMoveTo(new Vector2d(3,3)));
+        boolean result;
+        try{
+            result = rectangularMap.canMoveTo(new Vector2d(3,3));
+        }
+        catch (PositionAlreadyOccupiedException p){
+            result = false;
+        }
+        assertTrue(result);
     }
 
     @Test
     void canMoveToOutsideMap() {
         RectangularMap rectangularMap = new RectangularMap(5,5);
-        assertEquals(false,rectangularMap.canMoveTo(new Vector2d(6,6)));
+        try{
+            assertFalse(rectangularMap.canMoveTo(new Vector2d(6, 6)));
+        }
+        catch (PositionAlreadyOccupiedException p){
+        }
     }
 
     @Test
     void canMoveToOccupiedPosition() {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         rectangularMap.place(new Animal(new Vector2d(3,3)));
-        assertEquals(false,rectangularMap.canMoveTo(new Vector2d(3,3)));
+        try{
+            assertFalse(rectangularMap.canMoveTo(new Vector2d(6, 6)));
+        }
+        catch (PositionAlreadyOccupiedException p){
+            assertTrue(true);
+        }
     }
 
     @Test

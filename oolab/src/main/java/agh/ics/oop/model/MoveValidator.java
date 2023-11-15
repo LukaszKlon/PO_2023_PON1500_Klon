@@ -1,6 +1,6 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.PositionAlreadyOccupiedException;
 
 public interface MoveValidator<P> {
 
@@ -11,5 +11,5 @@ public interface MoveValidator<P> {
      *            The position checked for the movement possibility.
      * @return True if the object can move to that position.
      */
-    boolean canMoveTo(P position);
+    boolean canMoveTo(P position) throws PositionAlreadyOccupiedException;
 }

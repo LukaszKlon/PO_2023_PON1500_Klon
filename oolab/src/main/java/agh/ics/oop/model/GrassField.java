@@ -47,50 +47,6 @@ public class GrassField extends AbstractWorldMap{
         return null;
     }
 
-
-    private void findCorners(ExtremeCoordinates coordinates,Iterator<Vector2d> iterator){
-        while (iterator.hasNext()) {
-            Vector2d temporaryVector = iterator.next();
-            int coordinateXTemporary = temporaryVector.getX();
-            int coordinateYTemporary = temporaryVector.getY();
-            if (coordinateXTemporary < coordinates.getLeft()){
-                coordinates.setLeft(coordinateXTemporary);
-            }
-            else if ((coordinateXTemporary > coordinates.getRight())) {
-                coordinates.setRight(coordinateXTemporary);
-            }
-            if (coordinateYTemporary < coordinates.getBottom()){
-                coordinates.setBottom(coordinateYTemporary);
-            }
-            else if ((coordinateYTemporary > coordinates.getTop())) {
-                coordinates.setTop(coordinateYTemporary);
-            }
-        }
-    }
-
-    @Override
-    public String toString() {
-        MapVisualizer currentMap = new MapVisualizer(this);
-        Iterator<Vector2d> iteratorAnimals = animals.keySet().iterator();
-        Iterator<Vector2d> iteratorGrasses = grasses.keySet().iterator();
-        ExtremeCoordinates extremeCoordinates = new ExtremeCoordinates(0,0,0,0);
-        boolean flag = true;
-        if (iteratorAnimals.hasNext()){
-            flag = false;
-            Vector2d temporaryVector = iteratorAnimals.next();
-            extremeCoordinates = new ExtremeCoordinates(temporaryVector.getX(), temporaryVector.getX(), temporaryVector.getY(), temporaryVector.getY());
-            findCorners(extremeCoordinates,iteratorAnimals);
-        }
-        if (flag){
-            Vector2d temporaryVector = iteratorGrasses.next();
-            extremeCoordinates = new ExtremeCoordinates(temporaryVector.getX(), temporaryVector.getX(), temporaryVector.getY(), temporaryVector.getY());
-        }
-        findCorners(extremeCoordinates,iteratorGrasses);
-        Vector2d leftBottomCornerTemporary = new Vector2d(extremeCoordinates.getLeft(),extremeCoordinates.getBottom());
-        Vector2d rightTopCornerTemporary = new Vector2d(extremeCoordinates.getRight(), extremeCoordinates.getTop());
-        return currentMap.draw(leftBottomCornerTemporary,rightTopCornerTemporary);
-    }
-
     @Override
     public List<WorldElement<Vector2d>> getElements() {
         List<WorldElement<Vector2d>> allElements = super.getElements();
@@ -98,6 +54,20 @@ public class GrassField extends AbstractWorldMap{
             allElements.add(grasses.get(vector));
         }
         return allElements;
+    }
+
+    @Override
+    public Boundary getCurrentBoundary() {
+        List<WorldElement<Vector2d>> allElements = getElements();
+        Vector2d rightTop = allElements.get(0).getPosition();
+        Vector2d leftBottom = allElements.get(0).getPosition();
+        Vector2d currentElementPosition;
+        for (WorldElement<Vector2d> element:allElements) {
+            currentElementPosition = element.getPosition();
+            rightTop = rightTop.upperRight(currentElementPosition);
+            leftBottom = leftBottom.lowerLeft(currentElementPosition);
+        }
+        return new Boundary(leftBottom,rightTop);
     }
 
     public Iterator<Vector2d>getGrassesKeys(){
