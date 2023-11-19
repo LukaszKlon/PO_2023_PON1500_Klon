@@ -9,10 +9,10 @@ public class World {
     public static void main(String[] args) {
         System.out.println("Start");
         Animal zwierzak = new Animal();
-        System.out.println(zwierzak.toString());
+//        System.out.println(zwierzak.toString());
         List<MoveDirection> directions = OptionParser.parser(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        Simulation simulation = new Simulation(directions, positions);
+        Simulation simulation = new Simulation(directions, positions,new RectangularMap(6,6));
         simulation.run();
         System.out.println("Stop");
     }

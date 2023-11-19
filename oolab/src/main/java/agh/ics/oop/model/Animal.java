@@ -30,7 +30,12 @@ public class Animal {
     }
 
     public String toString() {
-        return "Orientacja: " + this.orientation.toString() + " pozycja: " + this.cordinats.toString();
+        return switch (orientation){
+            case NORTH -> "N";
+            case SOUTH -> "S";
+            case EAST -> "E";
+            case WEST -> "W";
+        };
     }
 
     public boolean isAt(Vector2d position) {
@@ -41,7 +46,7 @@ public class Animal {
         return futureMove.precedes(RIGHT_TOP_MAP_CORNER) && futureMove.follows(LEFT_BOTTOM_MAP_CORNER);
     }
 
-    public void move(MoveDirection direction) {
+    public void move(MoveDirection direction,MoveValidator validMove) {
         switch (direction) {
             case LEFT -> this.orientation = this.orientation.previous();
             case RIGHT -> this.orientation = this.orientation.next();
@@ -49,25 +54,25 @@ public class Animal {
                     switch (this.orientation) {
                         case NORTH -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_DOWN);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
                         case SOUTH -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_UP);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
                         case EAST -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_LEFT);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
                         case WEST -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_RIGHT);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
@@ -78,25 +83,25 @@ public class Animal {
                     switch (this.orientation) {
                         case NORTH -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_UP);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
                         case SOUTH -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_DOWN);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
                         case EAST -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_RIGHT);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
                         case WEST -> {
                             Vector2d futureMove = this.cordinats.add(VECTOR_GO_LEFT);
-                            if (insideArea(futureMove)) {
+                            if (validMove.canMoveTo(futureMove)) {
                                 this.cordinats = futureMove;
                             }
                         }
