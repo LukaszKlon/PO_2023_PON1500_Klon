@@ -9,5 +9,4 @@ public class RectangularMap extends AbstractWorldMap{
     public RectangularMap(int width,int length){
         super(new Vector2d(width-1,length-1));
     }
-
 }
