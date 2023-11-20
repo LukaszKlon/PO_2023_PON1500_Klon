@@ -20,28 +20,20 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
         this.rightTopMapCorner = rightTopMapCorner;
     }
 
-    public boolean canMoveTo(Vector2d position) throws PositionAlreadyOccupiedException {
-        if (isOccupiedAnimal(position)){
-            throw new PositionAlreadyOccupiedException(position);
-        }
+    public boolean canMoveTo(Vector2d position) {
         return position.precedes(rightTopMapCorner) && position.follows(leftBottomMapCorner) && !isOccupiedAnimal(position);
     }
 
-    public boolean place(WorldElement<Vector2d> object) {
+    public void place(WorldElement<Vector2d> object) throws PositionAlreadyOccupiedException {
         Vector2d position = object.getPosition();
         if (object.movable()){
-            try{
-                if (canMoveTo(position)) {
-                    animals.put(position,object);
-                    return true;
-                }
+            if (isOccupiedAnimal(position)){
+                throw new PositionAlreadyOccupiedException(position);
             }
-            catch (PositionAlreadyOccupiedException p){
-                return false;
+            else if (canMoveTo(position)) {
+                animals.put(position,object);
             }
-            return false;
         }
-        return false;
     }
 
     public void move(WorldElement<Vector2d> object, MoveDirection direction) {

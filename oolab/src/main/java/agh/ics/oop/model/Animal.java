@@ -56,7 +56,6 @@ public class Animal implements WorldElement<Vector2d>{
     }
 
     public void move(MoveDirection direction,MoveValidator validMove) {
-        try {
             switch (direction) {
                 case LEFT -> this.orientation = this.orientation.previous();
                 case RIGHT -> this.orientation = this.orientation.next();
@@ -118,9 +117,5 @@ public class Animal implements WorldElement<Vector2d>{
                     }
                 }
             }
-        }
-        catch (PositionAlreadyOccupiedException p){
-
-        }
         }
     }

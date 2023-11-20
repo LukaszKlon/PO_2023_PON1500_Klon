@@ -11,5 +11,5 @@ public interface MoveValidator<P> {
      *            The position checked for the movement possibility.
      * @return True if the object can move to that position.
      */
-    boolean canMoveTo(P position) throws PositionAlreadyOccupiedException;
+    boolean canMoveTo(P position);
 }

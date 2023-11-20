@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
@@ -17,7 +18,7 @@ public interface WorldMap<T extends WorldElement<P>,P> extends MoveValidator<P>{
      * @param object,position The object to place on the map.
      * @return True if the object was placed. The object cannot be placed if the move is not valid.
      */
-    boolean place(T object);
+    void place(T object) throws PositionAlreadyOccupiedException;
 
     /**
      * Moves an object (if it is present on the map) according to specified direction.

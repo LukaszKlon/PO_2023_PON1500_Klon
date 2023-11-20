@@ -1,6 +1,7 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.MapVisualizer;
+import agh.ics.oop.PositionAlreadyOccupiedException;
 
 import java.lang.Math;
 import java.util.*;
@@ -14,18 +15,24 @@ public class GrassField extends AbstractWorldMap{
         int parameter = (int) Math.sqrt(countGrass*10);
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(parameter, parameter, countGrass);
         for (Vector2d temporaryVector : randomPositionGenerator) {
-            place(new Grass(temporaryVector));
+            try {
+                place(new Grass(temporaryVector));
+            }
+            catch (PositionAlreadyOccupiedException p){
+                System.out.println(p.getMessage());
+            }
         }
     }
 
     @Override
-    public boolean place(WorldElement<Vector2d> object) {
+    public void place(WorldElement<Vector2d> object) throws PositionAlreadyOccupiedException {
         Vector2d position = object.getPosition();
         if (!object.movable()){
             grasses.put(position,object);
-            return true;
         }
-        return super.place(object);
+        else{
+            super.place(object);
+        }
     }
 
     public boolean isOccupied(Vector2d position) {

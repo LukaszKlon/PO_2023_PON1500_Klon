@@ -4,6 +4,7 @@ import agh.ics.oop.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Simulation {
 
@@ -15,8 +16,14 @@ public class Simulation {
         this.mapOfWorld = mapOfWorld;
         for (Vector2d position:positions) {
             Animal temporaryAnimal = new Animal(position);
-            if(mapOfWorld.place(temporaryAnimal)){
-                animalsArray.add(temporaryAnimal);
+            try{
+                if (this.mapOfWorld.canMoveTo(position)){
+                    this.animalsArray.add(temporaryAnimal);
+                }
+                mapOfWorld.place(temporaryAnimal);
+            }
+            catch (PositionAlreadyOccupiedException p){
+                System.out.println(p.getMessage());
             }
         }
         this.moves = moves;

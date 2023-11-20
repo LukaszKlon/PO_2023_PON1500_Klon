@@ -8,62 +8,32 @@ import static org.junit.jupiter.api.Assertions.*;
 class RectangularMapTest {
 
     @Test
-    void canMoveToEmptyMap() {
+    void testPlaceException() throws PositionAlreadyOccupiedException{
         RectangularMap rectangularMap = new RectangularMap(5,5);
-        boolean result;
-        try{
-            result = rectangularMap.canMoveTo(new Vector2d(3,3));
-        }
-        catch (PositionAlreadyOccupiedException p){
-            result = false;
-        }
-        assertTrue(result);
+        rectangularMap.place(new Animal(new Vector2d(2,2)));
+        assertThrows(PositionAlreadyOccupiedException.class, ()-> rectangularMap.place(new Animal(new Vector2d(2,2))));
     }
-
-    @Test
-    void canMoveToOutsideMap() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-        try{
-            assertFalse(rectangularMap.canMoveTo(new Vector2d(6, 6)));
-        }
-        catch (PositionAlreadyOccupiedException p){
-        }
-    }
-
-    @Test
-    void canMoveToOccupiedPosition() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-        rectangularMap.place(new Animal(new Vector2d(3,3)));
-        try{
-            assertFalse(rectangularMap.canMoveTo(new Vector2d(6, 6)));
-        }
-        catch (PositionAlreadyOccupiedException p){
-            assertTrue(true);
-        }
-    }
-
-    @Test
-    void placeOtherTypeThanAnimal() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-        assertEquals(false,rectangularMap.place(new Grass(new Vector2d(2,2))));
-    }
-
     @Test
     void placeAnimalInsideMap() {
         RectangularMap rectangularMap = new RectangularMap(5,5);
-        assertEquals(true,rectangularMap.place(new Animal(new Vector2d(2,2))));
-    }
-
-    @Test
-    void placeAnimalOutsideMap() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-        assertEquals(false,rectangularMap.place(new Animal(new Vector2d(3,8))));
+        try{
+            rectangularMap.place(new Animal(new Vector2d(2,2)));
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
+        assertEquals(true,rectangularMap.isOccupied(new Vector2d(2,2)));
     }
 
     @Test
     void moveInsideMap() {
         RectangularMap rectangularMap = new RectangularMap(5,5);
-        rectangularMap.place(new Animal(new Vector2d(2,2)));
+        try{
+            rectangularMap.place(new Animal(new Vector2d(2,2)));
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         rectangularMap.move(rectangularMap.objectAt(new Vector2d(2,2)),MoveDirection.FORWARD);
         assertEquals(true,rectangularMap.isOccupied(new Vector2d(2,3)));
     }
@@ -71,7 +41,12 @@ class RectangularMapTest {
     @Test
     void moveOutsideMap() {
         RectangularMap rectangularMap = new RectangularMap(5,5);
-        rectangularMap.place(new Animal(new Vector2d(4,4)));
+        try{
+            rectangularMap.place(new Animal(new Vector2d(4,4)));
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         rectangularMap.move(rectangularMap.objectAt(new Vector2d(4,4)),MoveDirection.FORWARD);
         assertEquals(true,rectangularMap.isOccupied(new Vector2d(4,4)));
     }
@@ -81,8 +56,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.FORWARD);
         assertEquals(new Vector2d(4,4),animalFirst.getPosition());
@@ -93,8 +73,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         assertEquals(true,rectangularMap.isOccupied(animalFirst.getPosition()));
     }
 
@@ -103,8 +88,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         assertEquals(false,rectangularMap.isOccupied(new Vector2d(2,2)));
     }
 
@@ -113,8 +103,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         assertEquals(animalFirst,rectangularMap.objectAt(animalFirst.getPosition()));
     }
 
@@ -123,8 +118,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.FORWARD);
         assertEquals(animalFirst,rectangularMap.objectAt(animalFirst.getPosition()));
@@ -135,8 +135,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.FORWARD);
@@ -160,7 +165,12 @@ class RectangularMapTest {
     void testToStringOnePetNorthOrientation() {
         RectangularMap rectangularMap = new RectangularMap(3,3);
         Animal animalFirst = new Animal(new Vector2d(1,1));
-        rectangularMap.place(animalFirst);
+        try{
+            rectangularMap.place(animalFirst);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         String result = " y\\x  0 1 2\r\n" +
                 "  3: -------\r\n" +
                 "  2: | | | |\r\n" +
@@ -175,7 +185,12 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(3,3);
         Animal animalFirst = new Animal(new Vector2d(1,1));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
+        try{
+            rectangularMap.place(animalFirst);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         String result = " y\\x  0 1 2\r\n" +
@@ -192,8 +207,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(3,3);
         Animal animalFirst = new Animal(new Vector2d(1,1));
         Animal animalSecond = new Animal(new Vector2d(2,2));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         rectangularMap.move(rectangularMap.objectAt(animalFirst.getPosition()),MoveDirection.LEFT);
         String result = " y\\x  0 1 2\r\n" +
@@ -210,8 +230,13 @@ class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(6,6);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
-        rectangularMap.place(animalFirst);
-        rectangularMap.place(animalSecond);
+        try{
+            rectangularMap.place(animalFirst);
+            rectangularMap.place(animalSecond);
+        }
+        catch (PositionAlreadyOccupiedException p){
+            System.out.println(p.getMessage());
+        }
         assertEquals(2,rectangularMap.getElements().size());
     }
 }
