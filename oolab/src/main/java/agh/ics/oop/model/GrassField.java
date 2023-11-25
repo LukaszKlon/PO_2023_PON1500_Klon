@@ -10,8 +10,8 @@ public class GrassField extends AbstractWorldMap{
 
     private final Map<Vector2d,WorldElement<Vector2d>> grasses = new HashMap<>();
 
-    public GrassField(int countGrass) {
-        super(new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE));
+    public GrassField(int countGrass,int Id) {
+        super(new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE),Id);
         int parameter = (int) Math.sqrt(countGrass*10);
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(parameter, parameter, countGrass);
         for (Vector2d temporaryVector : randomPositionGenerator) {

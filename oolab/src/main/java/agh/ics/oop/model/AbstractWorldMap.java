@@ -14,10 +14,12 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
     protected final Vector2d leftBottomMapCorner;
     protected final Vector2d rightTopMapCorner;
     protected final List<MapChangeListener> observersList = new ArrayList<>();
+    protected final int Id;
 
-    public AbstractWorldMap(Vector2d rightTopMapCorner) {
+    public AbstractWorldMap(Vector2d rightTopMapCorner,int Id) {
         this.leftBottomMapCorner = new Vector2d(0,0);
         this.rightTopMapCorner = rightTopMapCorner;
+        this.Id = Id;
     }
 
     public boolean canMoveTo(Vector2d position) {
@@ -98,4 +100,7 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
         observersList.remove(mapChangeListener);
     }
 
+    public int getId(){
+        return Id;
+    }
 }

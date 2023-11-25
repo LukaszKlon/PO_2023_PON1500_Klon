@@ -3,6 +3,7 @@ package agh.ics.oop;
 import agh.ics.oop.model.*;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 
 public class World {
@@ -11,11 +12,18 @@ public class World {
         Animal zwierzak = new Animal();
         List<MoveDirection> directions = OptionParser.parser(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        GrassField grassField = new GrassField(10);
+        List<Simulation> simulationList = new ArrayList<>();
         ConsoleMapDisplay consoleMapDisplay = new ConsoleMapDisplay();
-        grassField.registerObserver(consoleMapDisplay);
-        Simulation simulation = new Simulation(directions, positions,grassField);
-        simulation.run();
+        for (int i = 0; i < 1000; i++) {
+            GrassField grassField = new GrassField(10,i*2+1);
+            RectangularMap rectangularMap = new RectangularMap(10,10,i*2+2);
+            grassField.registerObserver(consoleMapDisplay);
+            rectangularMap.registerObserver(consoleMapDisplay);
+            simulationList.add(new Simulation(directions,positions,grassField));
+            simulationList.add(new Simulation(directions,positions,rectangularMap));
+        }
+        SimulationEngine simulationEngine = new SimulationEngine(simulationList);
+        simulationEngine.runAsyncInThreadPool();
         System.out.println("Stop");
     }
 

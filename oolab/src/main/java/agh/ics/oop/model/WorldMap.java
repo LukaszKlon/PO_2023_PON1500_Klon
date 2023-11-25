@@ -43,4 +43,6 @@ public interface WorldMap<T extends WorldElement<P>,P> extends MoveValidator<P>{
      * @return object or null if the position is not occupied.
      */
     T objectAt(P position);
+
+    int getId();
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Simulation {
+public class Simulation implements Runnable {
 
     private final List<Animal> animalsArray = new ArrayList<>();
     private final List<MoveDirection> moves;
@@ -29,20 +29,20 @@ public class Simulation {
         this.moves = moves;
     }
 
-    public List<Animal> run(){
+    @Override
+    public void run() {
         int animalsCount = animalsArray.size();
         int currentAnimal = 0;
         for (MoveDirection move:moves) {
             Animal newAnimal = animalsArray.get(currentAnimal);
             mapOfWorld.move(newAnimal,move);
             currentAnimal++;
-            if (currentAnimal >= animalsCount){
-                currentAnimal = 0;
-            }
+            currentAnimal = currentAnimal % animalsCount;
         }
-        return new ArrayList<Animal>(animalsArray);
     }
 
-
+    public List<Animal> getAnimalsArray() {
+        return new ArrayList<Animal>(animalsArray);
+    }
 
 }
