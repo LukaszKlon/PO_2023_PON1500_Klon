@@ -24,7 +24,7 @@ public class SimulationEngine {
         }
     }
 
-    public synchronized void runAsync(){
+    public synchronized void runAsync() throws InterruptedException{
         for (Simulation simulation : simulationList){
             Thread simulationThread = new Thread(simulation);
             simulationThread.start();
@@ -33,28 +33,18 @@ public class SimulationEngine {
         this.awaitSimulationsEnd();
     }
 
-    public void runAsyncInThreadPool(){
+    public void runAsyncInThreadPool() throws InterruptedException{
         for (Simulation simulation : simulationList){
             executorService.submit(simulation);
         }
-        executorService.shutdown();
         this.awaitSimulationsEnd();
     }
 
-    public void awaitSimulationsEnd(){
+    public void awaitSimulationsEnd() throws InterruptedException{
         for(Thread thread : threadList){
-            try{
-                thread.join();
-            }
-            catch (InterruptedException e){
-                e.printStackTrace();
-            }
+            thread.join();
         }
-        try{
-            executorService.awaitTermination(10, TimeUnit.SECONDS);
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        executorService.shutdown();
+        executorService.awaitTermination(10, TimeUnit.SECONDS);
     }
 }
