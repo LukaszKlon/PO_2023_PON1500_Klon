@@ -34,6 +34,12 @@ public class Simulation implements Runnable {
         int animalsCount = animalsArray.size();
         int currentAnimal = 0;
         for (MoveDirection move:moves) {
+            try{
+                Thread.sleep(3000);
+            }
+            catch (InterruptedException e){
+                System.out.println(e.getStackTrace());
+            }
             Animal newAnimal = animalsArray.get(currentAnimal);
             mapOfWorld.move(newAnimal,move);
             currentAnimal++;
