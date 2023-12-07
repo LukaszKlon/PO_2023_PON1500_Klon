@@ -22,22 +22,20 @@ public class SimulationPresenter implements MapChangeListener {
     WorldMap<WorldElement<Vector2d>,Vector2d> worldMap;
 
     public void setWorldMap(WorldMap<WorldElement<Vector2d>, Vector2d> worldMap) {
+        infoLabel.setText(worldMap.toString());
         this.worldMap = worldMap;
     }
 
-    public void drawMap(String message){
+    public void drawMap(){
         infoLabel.setText(worldMap.toString());
-        moveDescription.setText(message);
     }
 
     public void onSimulationStartClicked(){
         String[] args = textField.getText().split(" ");
-        ConsoleMapDisplay consoleMapDisplay = new ConsoleMapDisplay();
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
         List<MoveDirection> directions = OptionParser.parser(args);
         Simulation simulation = new Simulation(directions,positions,worldMap);
-//        grassField.registerObserver(consoleMapDisplay);
-//        simulation.run();
+
         SimulationEngine simulationEngine = new SimulationEngine(List.of(simulation));
         try{
             simulationEngine.runAsync();
@@ -45,12 +43,14 @@ public class SimulationPresenter implements MapChangeListener {
         catch (InterruptedException e){
             System.out.println(e.getStackTrace());
         }
+
     }
 
     @Override
     public void mapChanged(WorldMap<WorldElement<Vector2d>, Vector2d> worldMap, String message) {
         Platform.runLater(() -> {
-            drawMap(message);
+            drawMap();
+            moveDescription.setText(message);
         });
     }
 

@@ -44,8 +44,11 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
             animals.remove(position);
             object.move(direction,this);
             animals.put(object.getPosition(),object);
-            if (!position.equals(object.getPosition())){
+            if (!position.equals(object.getPosition())) {
                 mapChanged("Animal change position");
+            }
+            else if (MoveDirection.RIGHT == direction || MoveDirection.LEFT == direction){
+                mapChanged("Animal change direction");
             }
         }
     }

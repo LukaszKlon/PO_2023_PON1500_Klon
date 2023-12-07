@@ -24,13 +24,13 @@ public class SimulationEngine {
         }
     }
 
-    public synchronized void runAsync() throws InterruptedException{
+    public void runAsync() throws InterruptedException{
         for (Simulation simulation : simulationList){
             Thread simulationThread = new Thread(simulation);
             simulationThread.start();
             threadList.add(simulationThread);
         }
-        this.awaitSimulationsEnd();
+//        this.awaitSimulationsEnd();
     }
 
     public void runAsyncInThreadPool() throws InterruptedException{
