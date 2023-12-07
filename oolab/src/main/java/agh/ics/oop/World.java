@@ -23,8 +23,9 @@ public class World {
             simulationList.add(new Simulation(directions,positions,rectangularMap));
         }
         SimulationEngine simulationEngine = new SimulationEngine(simulationList);
+        simulationEngine.runAsyncInThreadPool();
         try{
-            simulationEngine.runAsyncInThreadPool();
+            simulationEngine.awaitSimulationsEnd();
         }
         catch (InterruptedException e){
             System.out.println(e.getMessage());
