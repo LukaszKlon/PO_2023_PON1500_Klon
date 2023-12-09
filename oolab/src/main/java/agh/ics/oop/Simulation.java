@@ -29,6 +29,7 @@ public class Simulation implements Runnable {
         this.moves = moves;
     }
 
+
     @Override
     public void run() {
         int animalsCount = animalsArray.size();

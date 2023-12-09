@@ -17,6 +17,10 @@ public class SimulationEngine {
     public SimulationEngine(List<Simulation> simulationList) {
         this.simulationList = simulationList;
     }
+    public SimulationEngine(Simulation simulation){
+        this.simulationList = new ArrayList<>();
+        this.simulationList.add(simulation);
+    }
 
     public void runSync(){
         for (Simulation simulation : simulationList){
@@ -30,14 +34,12 @@ public class SimulationEngine {
             simulationThread.start();
             threadList.add(simulationThread);
         }
-//        this.awaitSimulationsEnd();
     }
 
     public void runAsyncInThreadPool() throws InterruptedException{
         for (Simulation simulation : simulationList){
             executorService.submit(simulation);
         }
-        this.awaitSimulationsEnd();
     }
 
     public void awaitSimulationsEnd() throws InterruptedException{

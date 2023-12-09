@@ -45,4 +45,7 @@ public interface WorldMap<T extends WorldElement<P>,P> extends MoveValidator<P>{
     T objectAt(P position);
 
     int getId();
+
+    Boundary getCurrentBoundary();
+
 }

@@ -35,10 +35,10 @@ public class Animal implements WorldElement<Vector2d>{
 
     public String toString() {
         return switch (orientation){
-            case NORTH -> "N";
-            case SOUTH -> "S";
-            case EAST -> "E";
-            case WEST -> "W";
+            case NORTH -> "^";
+            case SOUTH -> "v";
+            case EAST -> ">";
+            case WEST -> "<";
         };
     }
 
