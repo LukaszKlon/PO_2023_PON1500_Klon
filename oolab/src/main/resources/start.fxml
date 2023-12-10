@@ -11,7 +11,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             minHeight="550.0" minWidth="850.0"
-            fx:controller="agh.ics.oop.presenter.SimulationPresenter">
+            fx:controller="agh.ics.oop.presenter.StartPresenter">
     <center>
         <VBox alignment="CENTER" spacing="10">
             <Label text="Enter postions:"/>
@@ -31,10 +31,10 @@
                     <Spinner fx:id="secondPositionY" max="1000" editable="true" initialValue="0"/>
                 </VBox>
             </HBox>
-            <TextField fx:id="textField" promptText="Enter moves here"/>
-            <GridPane fx:id="mapGrid" alignment="CENTER">
-            </GridPane>
-            <Label fx:id="moveDescription" text="" textAlignment="CENTER"/>
+<!--            <TextField fx:id="textField" promptText="Enter moves here"/>-->
+<!--            <GridPane fx:id="mapGrid" alignment="CENTER">-->
+<!--            </GridPane>-->
+<!--            <Label fx:id="moveDescription" text="" textAlignment="CENTER"/>-->
             <Button text="Start" onAction="#simulationStart"/>
         </VBox>
     </center>

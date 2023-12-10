@@ -7,15 +7,9 @@ import agh.ics.oop.model.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
-
+import javafx.scene.layout.*;
 
 import java.util.List;
 
@@ -26,20 +20,17 @@ public class SimulationPresenter implements MapChangeListener {
     private TextField textField;
     @FXML
     private GridPane mapGrid;
-    @FXML
-    private Spinner<Integer> firstPositionX;
-    @FXML
-    private Spinner<Integer> firstPositionY;
-    @FXML
-    private Spinner<Integer> secondPositionX;
-    @FXML
-    private Spinner<Integer> secondPositionY;
     private WorldMap<WorldElement<Vector2d>,Vector2d> worldMap;
+    private List<Vector2d> positions;
     static final int CELL_WIDTH = 30;
     static final int CELL_HEIGHT = 30;
     public void setWorldMap(WorldMap<WorldElement<Vector2d>, Vector2d> worldMap) {
         this.worldMap = worldMap;
         mapGrid.getChildren().add(gridCreator());
+    }
+
+    public void setPositions(List<Vector2d> positions){
+        this.positions = positions;
     }
 
     private GridPane gridCreator(){
@@ -73,14 +64,12 @@ public class SimulationPresenter implements MapChangeListener {
                 WorldElement<Vector2d> element = worldMap.objectAt(new Vector2d(cordX,cordY));
                 if (element != null){
                     label = new Label(element.toString());
-                    gridPane.add(label,j+1,numberRows-i);
-                    GridPane.setHalignment(label, HPos.CENTER);
                 }
                 else{
                     label = new Label(" ");
-                    gridPane.add(label,j+1,numberRows-i);
-                    GridPane.setHalignment(label, HPos.CENTER);
                 }
+                gridPane.add(label,j+1,numberRows-i);
+                GridPane.setHalignment(label, HPos.CENTER);
             }
         }
         gridPane.setGridLinesVisible(true);
@@ -100,7 +89,6 @@ public class SimulationPresenter implements MapChangeListener {
 
     public void onSimulationStartClicked(){
         String[] args = textField.getText().split(" ");
-        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
         List<MoveDirection> directions;
         try {
             directions = OptionParser.parser(args);
@@ -118,10 +106,6 @@ public class SimulationPresenter implements MapChangeListener {
         catch (InterruptedException e){
             System.out.println(e.getStackTrace());
         }
-
-    }
-
-    public void simulationStart(){
 
     }
 

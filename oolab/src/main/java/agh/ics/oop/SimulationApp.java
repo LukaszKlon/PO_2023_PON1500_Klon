@@ -1,37 +1,32 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.*;
-import agh.ics.oop.presenter.SimulationPresenter;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+
 
 import java.io.IOException;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 public class SimulationApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("simulation.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("start.fxml"));
         BorderPane viewRoot;
         try {
             viewRoot = loader.load();
         }
-        catch (IOException e){
+        catch (IOException e) {
             System.out.println("Couldn't load file");
             return;
         }
-        SimulationPresenter presenter = loader.getController();
         configureStage(primaryStage,viewRoot);
-
-        GrassField grassField = new GrassField(10,1);
-        presenter.setWorldMap(grassField);
-        grassField.registerObserver(presenter);
-        primaryStage.show();
     }
 
     private void configureStage(Stage primaryStage, BorderPane viewRoot) {
