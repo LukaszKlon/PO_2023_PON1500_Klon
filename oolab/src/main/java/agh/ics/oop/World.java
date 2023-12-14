@@ -10,27 +10,32 @@ import java.util.List;
 public class World {
     public static void main(String[] args) {
         System.out.println("Start");
-        Animal zwierzak = new Animal();
         List<MoveDirection> directions = OptionParser.parser(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
         List<Simulation> simulationList = new ArrayList<>();
         ConsoleMapDisplay consoleMapDisplay = new ConsoleMapDisplay();
         Application.launch(SimulationApp.class,args);
-//        for (int i = 0; i < 2; i++) {
-//            GrassField grassField = new GrassField(10,i*2+1);
-//            RectangularMap rectangularMap = new RectangularMap(10,10,i*2+2);
-//            grassField.registerObserver(consoleMapDisplay);
-//            rectangularMap.registerObserver(consoleMapDisplay);
-//            simulationList.add(new Simulation(directions,positions,grassField));
-//            simulationList.add(new Simulation(directions,positions,rectangularMap));
-//        }
-//        SimulationEngine simulationEngine = new SimulationEngine(simulationList);
-//        try{
-//            simulationEngine.runAsyncInThreadPool();
-//        }
-//        catch (InterruptedException e){
-//            System.out.println(e.getMessage());
-//        }
+        for (int i = 0; i < 2; i++) {
+            GrassField grassField = new GrassField(10,i*2+1);
+            RectangularMap rectangularMap = new RectangularMap(10,10,i*2+2);
+            grassField.registerObserver(consoleMapDisplay);
+            rectangularMap.registerObserver(consoleMapDisplay);
+            simulationList.add(new Simulation(directions,positions,grassField));
+            simulationList.add(new Simulation(directions,positions,rectangularMap));
+        }
+        SimulationEngine simulationEngine = new SimulationEngine(simulationList);
+        try{
+            simulationEngine.runAsyncInThreadPool();
+        }
+        catch (InterruptedException e){
+            System.out.println(e.getMessage());
+        }
+        try {
+            simulationEngine.awaitSimulationsEnd();
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
         System.out.println("Stop");
     }
 
