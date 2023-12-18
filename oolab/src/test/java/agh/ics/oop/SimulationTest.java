@@ -3,7 +3,6 @@ package agh.ics.oop;
 import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.html.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +80,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(1,4),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(1,4),firstAnimal.getPosition());
     }
     @Test
     void runPositions2() {
@@ -93,7 +92,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(4,4),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(4,4),firstAnimal.getPosition());
     }
     @Test
     void runPositions3() {
@@ -105,7 +104,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(2,2),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(2,2),firstAnimal.getPosition());
     }
     @Test
     void runPositions4() {
@@ -117,7 +116,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(0,1),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(0,1),firstAnimal.getPosition());
     }
     @Test
     void runPositions5() {
@@ -129,7 +128,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(1,1),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(1,1),firstAnimal.getPosition());
     }
     @Test
     void runPositionstwopets1() {
@@ -145,7 +144,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -163,7 +162,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -181,7 +180,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -199,7 +198,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -217,7 +216,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -235,7 +234,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -254,7 +253,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -274,7 +273,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -294,7 +293,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -314,7 +313,7 @@ class SimulationTest {
         List<Animal> animalList = simulation.run();
         List<Vector2d> result = new ArrayList<>();
         for (Animal animal:animalList) {
-            result.add(animal.getCordinats());
+            result.add(animal.getPosition());
         }
         assertEquals(result,expectedResult);
     }
@@ -355,7 +354,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(2,4),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(2,4),firstAnimal.getPosition());
     }
     @Test
     void runInsideMap2() {
@@ -367,7 +366,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(2,0),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(2,0),firstAnimal.getPosition());
     }
     @Test
     void runInsideMap3() {
@@ -379,7 +378,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(4,2),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(4,2),firstAnimal.getPosition());
     }
     @Test
     void runInsideMap4() {
@@ -391,7 +390,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(0,2),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(0,2),firstAnimal.getPosition());
     }
     @Test
     void runInsideMap5() {
@@ -403,7 +402,7 @@ class SimulationTest {
         Simulation simulation = new Simulation(moves,positions,new RectangularMap(5,5));
         List<Animal> animalList = simulation.run();
         Animal firstAnimal = animalList.get(0);
-        assertEquals(new Vector2d(0,4),firstAnimal.getCordinats());
+        assertEquals(new Vector2d(0,4),firstAnimal.getPosition());
     }
 
 

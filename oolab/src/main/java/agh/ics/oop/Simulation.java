@@ -9,9 +9,9 @@ public class Simulation {
 
     private final List<Animal> animalsArray = new ArrayList<>();
     private final List<MoveDirection> moves;
-    private final RectangularMap mapOfWorld;
+    private final WorldMap<WorldElement<Vector2d>,Vector2d> mapOfWorld;
 
-    public Simulation(List<MoveDirection> moves, List<Vector2d> positions, RectangularMap mapOfWorld){
+    public Simulation(List<MoveDirection> moves, List<Vector2d> positions,  WorldMap<WorldElement<Vector2d>,Vector2d> mapOfWorld){
         this.mapOfWorld = mapOfWorld;
         for (Vector2d position:positions) {
             Animal temporaryAnimal = new Animal(position);
