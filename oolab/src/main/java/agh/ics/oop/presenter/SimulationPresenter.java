@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SimulationPresenter implements MapChangeListener {
     @FXML
@@ -61,13 +62,8 @@ public class SimulationPresenter implements MapChangeListener {
             for (int j = 0; j < numberColumns; j++) {
                 cordY = boundary.leftBottom().getY()+i;
                 cordX = boundary.leftBottom().getX()+j;
-                WorldElement<Vector2d> element = worldMap.objectAt(new Vector2d(cordX,cordY));
-                if (element != null){
-                    label = new Label(element.toString());
-                }
-                else{
-                    label = new Label(" ");
-                }
+                Optional<WorldElement<Vector2d>> element = worldMap.objectAt(new Vector2d(cordX,cordY));
+                label = element.map(vector2dWorldElement -> new Label(vector2dWorldElement.toString())).orElseGet(() -> new Label(" "));
                 gridPane.add(label,j+1,numberRows-i);
                 GridPane.setHalignment(label, HPos.CENTER);
             }

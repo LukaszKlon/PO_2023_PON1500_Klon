@@ -11,7 +11,7 @@ class GrassFieldTest {
 
     @Test
     void testPlaceException() throws PositionAlreadyOccupiedException{
-        GrassField  grass =  new GrassField(10);
+        GrassField  grass =  new GrassField(10,0);
         grass.place(new Animal(new Vector2d(2,2)));
         assertThrows(PositionAlreadyOccupiedException.class, ()-> grass.place(new Animal(new Vector2d(2,2))));
     }
@@ -19,7 +19,7 @@ class GrassFieldTest {
 
     @Test
     void placeAnimalInsideMap() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         try{
             grassField.place(new Grass(new Vector2d(2,2)));
         }
@@ -31,7 +31,7 @@ class GrassFieldTest {
 
     @Test
     void moveInsideMap() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         try{
             grassField.place(new Animal(new Vector2d(2,2)));
         }
@@ -44,7 +44,7 @@ class GrassFieldTest {
 
     @Test
     void moveToOccupiedPosition() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -61,7 +61,7 @@ class GrassFieldTest {
 
     @Test
     void isOccupiedAnimal() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -76,7 +76,7 @@ class GrassFieldTest {
 
     @Test
     void isOccupiedGrass() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -91,7 +91,7 @@ class GrassFieldTest {
     }
     @Test
     void isOccupiednotOcupied() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -106,7 +106,7 @@ class GrassFieldTest {
 
     @Test
     void objectAtAnimal() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -121,7 +121,7 @@ class GrassFieldTest {
 
     @Test
     void objectAtGrass() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -137,7 +137,7 @@ class GrassFieldTest {
 
     @Test
     void getElementsAllObjects() {
-        GrassField grassField = new GrassField(10);
+        GrassField grassField = new GrassField(10,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{

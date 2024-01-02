@@ -9,13 +9,13 @@ class RectangularMapTest {
 
     @Test
     void testPlaceException() throws PositionAlreadyOccupiedException{
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         rectangularMap.place(new Animal(new Vector2d(2,2)));
         assertThrows(PositionAlreadyOccupiedException.class, ()-> rectangularMap.place(new Animal(new Vector2d(2,2))));
     }
     @Test
     void placeAnimalInsideMap() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         try{
             rectangularMap.place(new Animal(new Vector2d(2,2)));
         }
@@ -27,7 +27,7 @@ class RectangularMapTest {
 
     @Test
     void moveInsideMap() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         try{
             rectangularMap.place(new Animal(new Vector2d(2,2)));
         }
@@ -40,7 +40,7 @@ class RectangularMapTest {
 
     @Test
     void moveOutsideMap() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         try{
             rectangularMap.place(new Animal(new Vector2d(4,4)));
         }
@@ -53,7 +53,7 @@ class RectangularMapTest {
 
     @Test
     void moveToOccupiedPosition() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -70,7 +70,7 @@ class RectangularMapTest {
 
     @Test
     void isOccupiedAnimal() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -85,7 +85,7 @@ class RectangularMapTest {
 
     @Test
     void isOccupiedEmptyPosition() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -100,7 +100,7 @@ class RectangularMapTest {
 
     @Test
     void objectAtAfterPlace() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -115,7 +115,7 @@ class RectangularMapTest {
 
     @Test
     void objectAtAfterMoveToOccupiedPosition() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -132,7 +132,7 @@ class RectangularMapTest {
 
     @Test
     void objectAtAfterMoves() {
-        RectangularMap rectangularMap = new RectangularMap(5,5);
+        RectangularMap rectangularMap = new RectangularMap(5,5,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -151,7 +151,7 @@ class RectangularMapTest {
 
     @Test
     void testToStringEmptyMap() {
-        RectangularMap rectangularMap = new RectangularMap(3,3);
+        RectangularMap rectangularMap = new RectangularMap(3,3,0);
         String result = " y\\x  0 1 2\r\n" +
                 "  3: -------\r\n" +
                 "  2: | | | |\r\n" +
@@ -163,7 +163,7 @@ class RectangularMapTest {
 
     @Test
     void testToStringOnePetNorthOrientation() {
-        RectangularMap rectangularMap = new RectangularMap(3,3);
+        RectangularMap rectangularMap = new RectangularMap(3,3,0);
         Animal animalFirst = new Animal(new Vector2d(1,1));
         try{
             rectangularMap.place(animalFirst);
@@ -182,7 +182,7 @@ class RectangularMapTest {
 
     @Test
     void testToStringOnePetSouthOrientation() {
-        RectangularMap rectangularMap = new RectangularMap(3,3);
+        RectangularMap rectangularMap = new RectangularMap(3,3,0);
         Animal animalFirst = new Animal(new Vector2d(1,1));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
@@ -204,7 +204,7 @@ class RectangularMapTest {
 
     @Test
     void testToStringTwoPets() {
-        RectangularMap rectangularMap = new RectangularMap(3,3);
+        RectangularMap rectangularMap = new RectangularMap(3,3,0);
         Animal animalFirst = new Animal(new Vector2d(1,1));
         Animal animalSecond = new Animal(new Vector2d(2,2));
         try{
@@ -227,7 +227,7 @@ class RectangularMapTest {
 
     @Test
     void getElementsAllObjects() {
-        RectangularMap rectangularMap = new RectangularMap(6,6);
+        RectangularMap rectangularMap = new RectangularMap(6,6,0);
         Animal animalFirst = new Animal(new Vector2d(4,4));
         Animal animalSecond = new Animal(new Vector2d(3,4));
         try{
