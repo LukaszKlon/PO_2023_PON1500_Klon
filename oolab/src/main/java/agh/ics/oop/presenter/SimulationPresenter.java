@@ -23,8 +23,8 @@ public class SimulationPresenter implements MapChangeListener {
     private GridPane mapGrid;
     private WorldMap<WorldElement<Vector2d>,Vector2d> worldMap;
     private List<Vector2d> positions;
-    static final int CELL_WIDTH = 30;
-    static final int CELL_HEIGHT = 30;
+    static final int CELL_WIDTH = 40;
+    static final int CELL_HEIGHT = 40;
     public void setWorldMap(WorldMap<WorldElement<Vector2d>, Vector2d> worldMap) {
         this.worldMap = worldMap;
         mapGrid.getChildren().add(gridCreator());
@@ -55,6 +55,9 @@ public class SimulationPresenter implements MapChangeListener {
             gridPane.add(label,1+i,0);
             GridPane.setHalignment(label, HPos.CENTER);
         }
+        String path;
+        VBox vBox = new VBox();
+        WorldElementBox worldElementBox = new WorldElementBox();
         label =new Label("y\\x");
         gridPane.add(label,0,0);
         GridPane.setHalignment(label, HPos.CENTER);
@@ -64,8 +67,16 @@ public class SimulationPresenter implements MapChangeListener {
                 cordX = boundary.leftBottom().getX()+j;
                 Optional<WorldElement<Vector2d>> element = worldMap.objectAt(new Vector2d(cordX,cordY));
                 label = element.map(vector2dWorldElement -> new Label(vector2dWorldElement.toString())).orElseGet(() -> new Label(" "));
-                gridPane.add(label,j+1,numberRows-i);
-                GridPane.setHalignment(label, HPos.CENTER);
+                if (element.isPresent()){
+                    System.out.println(element.map(WorldElement::getResource).get());
+                    vBox = worldElementBox.createVbox(element.map(WorldElement::getResource).get(),element.map(WorldElement::getPosition).get());
+                }
+                else{
+                    vBox = new VBox();
+                }
+//                gridPane.add(label,j+1,numberRows-i);
+                gridPane.add(vBox,j+1,numberRows-i);
+                GridPane.setHalignment(vBox, HPos.CENTER);
             }
         }
         gridPane.setGridLinesVisible(true);

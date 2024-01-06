@@ -28,4 +28,9 @@ public class Grass implements WorldElement<Vector2d>{
     public void move(MoveDirection direction, MoveValidator validMove) {
     }
 
+    @Override
+    public String getResource() {
+        return "grass.png";
+    }
+
 }

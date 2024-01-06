@@ -20,4 +20,6 @@ public interface WorldElement<P> {
 
     void move(MoveDirection direction,MoveValidator validMove);
 
+    String getResource();
+
 }
