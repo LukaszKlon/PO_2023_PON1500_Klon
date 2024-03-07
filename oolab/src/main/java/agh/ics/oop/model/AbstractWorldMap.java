@@ -3,10 +3,10 @@ package agh.ics.oop.model;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.PositionAlreadyOccupiedException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d>,Vector2d>,MapChangeListener{
 
@@ -20,6 +20,8 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
         this.leftBottomMapCorner = new Vector2d(0,0);
         this.rightTopMapCorner = rightTopMapCorner;
         this.Id = Id;
+        FileMapDisplay fileMapDisplay = new FileMapDisplay(this);
+        this.registerObserver(fileMapDisplay);
     }
 
     public boolean canMoveTo(Vector2d position) {
@@ -44,11 +46,14 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
             animals.remove(position);
             object.move(direction,this);
             animals.put(object.getPosition(),object);
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
             if (!position.equals(object.getPosition())) {
-                mapChanged("Animal change position");
+                mapChanged(now.format(formatter) + " Animal change position from " + position +" to "+ object.getPosition());
             }
             else if (MoveDirection.RIGHT == direction || MoveDirection.LEFT == direction){
-                mapChanged("Animal change direction");
+                mapChanged(now.format(formatter) + " Animal on position " + position +" change direction");
             }
         }
     }
@@ -61,19 +66,17 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
         return animals.containsKey(position);
     }
 
-    public WorldElement<Vector2d> objectAt(Vector2d position) {
+    public Optional<WorldElement<Vector2d>> objectAt(Vector2d position) {
         if (isOccupiedAnimal(position)) {
-            return animals.get(position);
+            return Optional.ofNullable(animals.get(position));
         }
-        return null;
+        return Optional.empty();
     }
 
     public List<WorldElement<Vector2d>> getElements(){
-        List<WorldElement<Vector2d>> allElements = new ArrayList<>();
-        for (Vector2d vector:animals.keySet()) {
-            allElements.add(animals.get(vector));
-        }
-        return allElements;
+        return animals.keySet().stream()
+                .map(animals::get)
+                .collect(Collectors.toList());
     }
 
     abstract public Boundary getCurrentBoundary();
@@ -86,9 +89,7 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
 
     @Override
     public void mapChanged(WorldMap<WorldElement<Vector2d>, Vector2d> worldMap, String message) {
-        for (MapChangeListener observer : observersList) {
-            observer.mapChanged(this, message);
-        }
+        observersList.forEach(observer -> observer.mapChanged(this, message));
     }
 
     public void mapChanged(String message) {
@@ -105,5 +106,21 @@ public abstract class AbstractWorldMap implements WorldMap<WorldElement<Vector2d
 
     public int getId(){
         return Id;
+    }
+
+    public List<WorldElement<Vector2d>> getOrderedAnimals(){
+        List<Vector2d> vectorList = new ArrayList<>(animals.keySet());
+
+        Comparator<Vector2d> vectorComparator = Comparator
+                .comparing(Vector2d::getX)
+                .thenComparing(Vector2d::getY);
+
+        vectorList.sort(vectorComparator);
+
+        return vectorList.stream()
+                .sorted(vectorComparator)
+                .map(this::objectAt)
+                .flatMap(Optional::stream)
+                .toList();
     }
 }

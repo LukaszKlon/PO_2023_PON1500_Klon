@@ -1,10 +1,10 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.PositionAlreadyOccupiedException;
 
 import java.lang.Math;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class GrassField extends AbstractWorldMap{
 
@@ -43,24 +43,21 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public WorldElement<Vector2d> objectAt(Vector2d position) {
-        WorldElement<Vector2d> animal =  super.objectAt(position);
-        if (animal != null){
+    public Optional<WorldElement<Vector2d>> objectAt(Vector2d position) {
+        Optional<WorldElement<Vector2d>> animal =  super.objectAt(position);
+        if (animal.isPresent()){
             return animal;
         }
         if (isOccupiedGrass(position)){
-            return grasses.get(position);
+            return Optional.ofNullable(grasses.get(position));
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
     public List<WorldElement<Vector2d>> getElements() {
         List<WorldElement<Vector2d>> allElements = super.getElements();
-        for (Vector2d vector: grasses.keySet()) {
-            allElements.add(grasses.get(vector));
-        }
-        return allElements;
+        return Stream.concat(grasses.keySet().stream().map(grasses::get), allElements.stream()).toList();
     }
 
     @Override

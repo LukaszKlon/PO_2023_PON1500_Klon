@@ -1,6 +1,8 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.PositionAlreadyOccupiedException;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Animal implements WorldElement<Vector2d>{
 
@@ -118,4 +120,14 @@ public class Animal implements WorldElement<Vector2d>{
                 }
             }
         }
+
+    @Override
+    public String getResource() {
+        return switch (orientation){
+            case EAST -> "right.png";
+            case WEST -> "left.png";
+            case SOUTH -> "down.png";
+            case NORTH -> "up.png";
+            };
     }
+}
