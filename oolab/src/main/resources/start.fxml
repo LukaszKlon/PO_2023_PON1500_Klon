@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            minHeight="550.0" minWidth="850.0"
+            fx:controller="agh.ics.oop.presenter.StartPresenter">
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Enter postions:"/>
+            <HBox alignment="CENTER" spacing="10">
+                <VBox alignment="BOTTOM_LEFT" spacing="10">
+                    <Label text="First animal position"/>
+                    <Label text="X:"/>
+                    <Spinner fx:id="firstPositionX" max="1000" editable="true" initialValue="0"/>
+                    <Label text="Y:"/>
+                    <Spinner fx:id="firstPositionY" max="1000" editable="true" initialValue="0"/>
+                </VBox>
+                <VBox alignment="BOTTOM_LEFT" spacing="10">
+                    <Label text="First animal position"/>
+                    <Label text="X:"/>
+                    <Spinner fx:id="secondPositionX" max="1000" editable="true" initialValue="0"/>
+                    <Label text="Y:"/>
+                    <Spinner fx:id="secondPositionY" max="1000" editable="true" initialValue="0"/>
+                </VBox>
+            </HBox>
+<!--            <TextField fx:id="textField" promptText="Enter moves here"/>-->
+<!--            <GridPane fx:id="mapGrid" alignment="CENTER">-->
+<!--            </GridPane>-->
+<!--            <Label fx:id="moveDescription" text="" textAlignment="CENTER"/>-->
+            <Button text="Start" onAction="#simulationStart"/>
+        </VBox>
+    </center>
+</BorderPane>

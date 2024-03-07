@@ -2,46 +2,40 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
-public class OptionParser {
-    public static MoveDirection[] parser(String[] args){
-        int l =0;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-        // wyznaczamy długość tablicy
-        for (String arg:args) {
-
-            if ("f".equalsIgnoreCase(arg) || "b".equalsIgnoreCase(arg) ||"l".equalsIgnoreCase(arg) ||"r".equalsIgnoreCase(arg) ){
-                l++;
-            }
-
-        }
-
-        MoveDirection[] table = new MoveDirection[l];
-        int i = 0;
-
-        for (String arg:args) {
-
-            switch (arg.toLowerCase()){
-                case "b":
-                    table[i] = MoveDirection.BACKWARD;
-                    i++;
-                    break;
+public class OptionParser  {
+    public static List<MoveDirection> parser(String[] args){
+        List<MoveDirection> moveTable = new ArrayList<>();
+        return Arrays.stream(args).map(arg -> {
+            switch (arg) {
                 case "f":
-                    table[i] = MoveDirection.FORWARD;
-                    i++;
-                    break;
+                    return MoveDirection.FORWARD;
+                case "b":
+                    return MoveDirection.BACKWARD;
                 case "l":
-                    table[i] = MoveDirection.LEFT;
-                    i++;
-                    break;
+                    return MoveDirection.LEFT;
                 case "r":
-                    table[i] = MoveDirection.RIGHT;
-                    i++;
-                    break;
+                    return MoveDirection.RIGHT;
                 default:
-                    break;
+                    throw new IllegalArgumentException(arg + " is not a legal move specification");
             }
-        }
-        return table;
+        }).collect(Collectors.toList());
+//        for (String arg:args) {
+//            switch (arg){
+//                case "f" -> moveTable.add(MoveDirection.FORWARD);
+//                case "b" -> moveTable.add(MoveDirection.BACKWARD);
+//                case "l" -> moveTable.add(MoveDirection.LEFT);
+//                case "r" -> moveTable.add(MoveDirection.RIGHT);
+//                default -> {
+//                    throw new IllegalArgumentException(arg + " is not legal move specification");
+//                }
+//            }
+//        }
+//        return moveTable;
     }
 }
 
